@@ -1,0 +1,214 @@
+\documentclass{ieeeojies}
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{array}
+\usepackage[T1]{fontenc}
+\usepackage{xcolor}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{float}
+\usepackage{breqn}
+\usepackage{url}
+\usepackage{times} 
+\usepackage{amsmath}
+\usepackage{helvet}
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+\begin{document}
+\title{\centering USING STATISTICAL MODEL AND MACHINE LEARNING FOR CRYPTOCURRENCY PRICE PREDICTION}
+
+\author{\uppercase{Le Quoc Khanh}\authorrefmark{1},\uppercase{Le Gia Kiet\authorrefmark{2}, and Nguyen Thi Thuy}\authorrefmark{3}}
+
+\address[1]{Faculty of Information Systems, University of Information Technology, (e-mail: 21520283@gm.uit.edu.vn)}
+\address[2]{Faculty of Information Systems, University of Information Technology, (e-mail: 21522255@gm.uit.edu.vn)}
+\address[3]{Faculty of Information Systems, University of Information Technology, (e-mail: 25122662@gm.uit.edu.vn)}
+
+\markboth
+{Author \headeretal: Le Quoc Khanh, Le Gia Kiet, Nguyen Thi Thuy}
+{Author \headeretal: Le Quoc Khanh, Le Gia Kiet, Nguyen Thi Thuy}
+
+\begin{abstract}
+    Cryptocurrency price prediction is a challenging yet crucial task in the dynamic realm of financial markets. In this article, we explore the efficacy of various statistical models and machine learning algorithms to forecast cryptocurrency prices. Leveraging a diverse toolkit including Linear Regression, ARIMAX (AutoRegressive Integrated Moving Average with Exogenous Variables), Recurrent Neural Networks (RNN), Gated Recurrent Units (GRU), Long Short-Term Memory (LSTM) networks, Vector Autoregression (VAR), XGBoost, and LightGBM, we aim to capture the complex patterns inherent in cryptocurrency price movements. Technical indicators serve as the primary features, offering insights into market sentiment and trends. Through rigorous evaluation and comparison of these models, we seek to discern their strengths and weaknesses in accurately predicting cryptocurrency prices, contributing to the advancement of predictive analytics in the volatile domain of digital assets.
+\end{abstract}
+
+\begin{keywords}
+    \textit{Cryptocurrency price, Forecasting, Technical Indicators, Linear regression, ARIMAX, RNN, GRU, LSTM, VAR, XGBoost, LightGBM}
+\end{keywords}
+
+\titlepgskip=-15pt
+
+\maketitle
+
+\section{Introduction}
+\label{sec:introduction}
+\indent Cryptocurrency has become a significant and rapidly growing market, with thousands of different digital currencies available for trading. With the rise of cryptocurrency, there has been an increasing demand for accurate and reliable price prediction models. This paper aims to explore the use of statistical models and machine learning algorithms to predict the price of three popular cryptocurrencies: Bitcoin, Ethereum, and Dogecoin.\\
+\indent The price of cryptocurrencies is influenced by a variety of factors, including market demand, investor sentiment, and global economic conditions. These factors make predicting the price of cryptocurrencies a challenging task. However, with the use of statistical models and machine learning algorithms, it is possible to identify patterns and trends in the data that can be used to make more accurate predictions.\\
+\indent This paper scrutinizes a comprehensive suite of models, encompassing traditional statistical methods and advanced machine learning algorithms. Specifically, we explore the application of Linear Regression, ARIMAX (AutoRegressive Integrated Moving Average with Exogenous Variables), Recurrent Neural Networks (RNN), Gated Recurrent Units (GRU), Long Short-Term Memory (LSTM) networks, Vector Autoregression (VAR), XGBoost, and LightGBM. We will evaluate the performance of these models using historical price data and assess their ability to accurately predict future price movements.\\
+\indent Technical indicators provide valuable insights into market sentiment and trends, aiding in predicting price movements. Integrating these indicators into machine learning models offers a promising strategy to leverage the abundant cryptocurrency market data. This study employs various stock market evaluation indicators, such as moving averages and momentum indicators, to derive features for machine learning. The goal is to enhance predictive accuracy by enabling algorithms to identify meaningful patterns.\\
+\indent In summary, by using statistical models and machine learning algorithms to predict the price of cryptocurrencies, investors and traders can make more informed decisions and potentially increase their returns. Additionally, these models and algorithms can be used by cryptocurrency exchanges and financial institutions to manage risk and improve their trading strategies.
+
+\section{Related Works}
+
+\indent There have been multiple studies conducted on the use of statistical models and machine learning algorithms for cryptocurrency price prediction. In a article by Gouxuan Son (2024)\cite{b1}, two models that we concerned in three distinct models employed, Xboost and LightGBM, for predicting Bitcoin prices was conducted. Another paper by Ziyang Yuan (2023)\cite{b2} used KNN, XGBoost and LightGBM to predict the price of Gold and Bitcoin Price. Especially, the investigation found that LightGBM is more effective and space-saving.  Haydier, Albarwari and Ali compared  between  VAR  and  ARIMAX  Time  Series  Models  in Forecasting \cite{b3}. The results showed that the VAR model is better than the ARIMAX model for their observed data depending on the MSE criterion.\\
+\indent In another article,\cite{b4} the authors compared the performance of LSTM and GRU models in predicting Bitcoin prices. Additionally, they approved that the GRU model was able to capture long-term dependencies in the Bitcoin price data, while the LSTM model struggled to do so. Meanwhile, \cite{b5} compared and proved that LSTM is also better than RNN.\\
+\indent Recent research emphasizes the pivotal role of feature selection in developing effective and interpretable models for cryptocurrency price prediction. Huang, Huang, and Ni (2019) \cite{b6} showcased this significance by integrating high-dimensional technical indicators to predict bitcoin returns. Similarly, Mudassir et al. (2020) \cite{b7} employed a machine learning approach using such features for time-series forecasting of Bitcoin prices. These studies underscore the increasing acknowledgment of technical indicators as valuable features in enhancing predictive accuracy within cryptocurrency markets.\\
+\indent Based on insights gleaned from numerous prior literature studies, this research aims to predict cryptocurrency prices utilizing a diverse array of predictive models, including Linear Regression, ARIMAX, RNN, GRU, LSTM, VAR, XGBoost, and LightGBM.
+
+\section{Materials}
+\subsection{Dataset}
+The data is collected from finance.yahoo.com, downloading the daily data of Bitcoin, Ethereum and Dogecoin from 2018-Mar-01 to 2024-Mar-01, including close price, open price, high price, low price, Adjust close and the  volume of trading coins with Currency in USD. \\
+Including attributes
+\begin{itemize}
+    \raggedright
+    \item Date: Represents the date of the trading day.
+    \item Open: Refers to the opening price of Bitcoin/Ethereum/Dogecoin on that particular day.
+    \item High: Indicates the highest price reached by Bitcoin/Ethereum/Dogecoin during that day.
+    \item Low: Represents the lowest price reached by Bitcoin/Ethereum/Dogecoin during that day.
+    \item Close: Refers to the closing price of Bitcoin/ETH/Dogecoin on that day.
+    \item Adj Close: Represents the adjusted closing price, which accounts for factors like dividends and stock splits.
+    \item Volume: Refers to the trading volume of Bitcoin on that day, i.e., the total number of Bitcoin/Ethereum/Dogecoin units traded.
+\end{itemize}
+As the goal is to forecast the price, only data relating to column “Close"
+(USD) will be analyzed
+
+\subsection{Descriptive Statistics}
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.2} % Increase row spacing by 20%
+    \newcolumntype{R}{>{\raggedleft\arraybackslash}r} % Define new right-aligned column
+    \begin{tabular}{|c|R|R|R|}
+        \hline
+        \multicolumn{1}{|c|}{\textbf{}} & \multicolumn{1}{c|}{\textbf{DOGE}} & \multicolumn{1}{c|}{\textbf{BTC}} & \multicolumn{1}{c|}{\textbf{ETH}} \\
+        \hline
+        Count                           & 2193                               & 2193                              & 2193                              \\
+        \hline
+        Mean                            & 0.067                              & 22727.117                         & 1298.755                          \\
+        \hline
+        Median                          & 0.053952                           & 19191.63086                       & 1213.599976                       \\
+        \hline
+        Mode                            & 0.002653                           & 6741.75                           & none                              \\
+        \hline
+        Min                             & 0.002                              & 3236.762                          & 84.308                            \\
+        \hline
+        25\%                            & 0.003                              & 8368.83                           & 228.73                            \\
+        \hline
+        50\%                            & 0.054                              & 19191.631                         & 1213.6                            \\
+        \hline
+        75\%                            & 0.084                              & 35510.289                         & 1924.566                          \\
+        \hline
+        Max                             & 0.685                              & 67566.828                         & 4812.087                          \\
+        \hline
+        Std                             & 0.09                               & 16431.978                         & 1145.552                          \\
+        \hline
+        Variance                        & 0.008166821                        & 270009888.9                       & 1312289.819                       \\
+        \hline
+        Kurtosis                        & 6.38367187                         & -0.652902729                      & -0.181911084                      \\
+        \hline
+        Skewness                        & 2.186196643                        & 0.702529234                       & 0.81204465                        \\
+        \hline
+        Range                           & 0.683                              & 64330.066                         & 4727.779                          \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.23\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{graph/doge_boxplot.png}
+        \caption{DOGE's Box Plot}
+        \label{fig:1}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.23\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{graph/doge_his.png}
+        \caption{DOGE's Histogram}
+        \label{fig:2}
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.23\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{graph/btc_boxplot.png}
+        \caption{BTC's Box Plot}
+        \label{fig:3}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.23\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{graph/btc_his.png}
+        \caption{BTC's Histogram}
+        \label{fig:4}
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.23\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{graph/eth_boxplot.png}
+        \caption{ETH's Box Plot}
+        \label{fig:5}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.23\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{graph/eth_his.png}
+        \caption{ETH's Histogram}
+        \label{fig:6}
+    \end{minipage}
+
+\end{figure}
+
+\begin{itemize}
+    \item Across all three cryptocurrencies, there are remarkable differences in mean values, indicating diverse price levels. Moreover, the considerable range between minimum and maximum values highlights the wide fluctuations in prices, portraying substantial volatility within the market.
+    \item The high standard deviation, positive kurtosis, and skewness values suggest non-normal distributions with fat tails and right skewness. This indicates frequent occurrence of outliers and a tendency for prices to be skewed towards higher values, which means the occurrence of high prices isn't significant.
+    \item These measures contributes to a summary that it is potential for high profits but also heightened risks when investing in these three cryptocurrencies.
+
+\end{itemize}
+
+\section{Methodology}
+\section{Result}
+
+\subsection{Evaluation Methods}
+
+\section{Conclusion}
+
+\subsection{Summary}
+
+\subsection{Future Considerations}
+
+\section*{Acknowledgment}
+
+
+%% UNCOMMENT these lines below (and remove the 2 commands above) if you want to embed the bibliografy.
+\begin{thebibliography}{00}
+    \bibitem{b1} Sun, G. (2024). Cryptocurrency price prediction based on Xgboost, LightGBM and BNN. \textit{Applied and Computational Engineering}, 49(1), 273–279. \url{https://doi.org/10.54254/2755-2721/49/20241414}
+
+    \bibitem{b2} Yuan, Z. (2023). Gold and Bitcoin Price Prediction based on KNN, XGBoost and LightGBM Model. \textit{Highlights in Science, Engineering and Technology}, 39, 720–725. \url{https://doi.org/10.54097/hset.v39i.6635}
+
+    \bibitem{b3} Haydier, E., Albarwari, N., \& Ali, T. H. (2023, December 1). The Comparison Between VAR and ARIMAX Time Series Models in Forecasting. \textit{Iraqi Journal of Statistical Sciences}. \url{https://doi.org/10.33899/iqjoss.2023.181260}
+
+    \bibitem{b4} Dutta, A., Kumar, S. S., \& Basu, M. (2020). A gated Recurrent unit approach to bitcoin price prediction. \textit{Journal of Risk and Financial Management}, 13(2), 23. \url{https://doi.org/10.3390/jrfm13020023}
+
+    \bibitem{b5} Gunarto, D. M., Saadah, S., \& Utama, D. Q. (2023). Predicting cryptocurrency price using RNN and LSTM method. \textit{Jurnal Sistem Informasi Dan Komputer/Jurnal Sisfokom}, 12(1), 1–8. \url{https://doi.org/10.32736/sisfokom.v12i1.1554}
+
+    \bibitem{b6} Huang, J.-Z., Huang, W., \& Ni, J. (2019). Predicting bitcoin returns using high-dimensional technical indicators. \textit{The Journal of Finance and Data Science}, 5(3), 140–155. \url{https://doi.org/10.1016/j.jfds.2018.10.001}
+
+    \bibitem{b7} Mudassir, M., Bennbaia, S., Ünal, D., \& Hammoudeh, M. (2020). Time-series forecasting of Bitcoin prices using high-dimensional features: a machine learning approach. \textit{Neural Computing and Applications}. \url{https://doi.org/10.1007/s00521-020-05129-6}
+
+    \bibitem{b8} Metsileng, L. D., Moroke, N. D., \& Tsoku, J. T. (2018). Modelling the BRICS exchange rates using the Vector Autoregressive (VAR) model. \textit{Journal of Economics and Behavioral Studies}, 10(5(J)), 220–229. \url{https://doi.org/10.22610/jebs.v10i5(j).2511}
+\end{thebibliography}
+
+\EOD
+
+\end{document}
