@@ -1,3 +1,4 @@
+% !TeX root = Report.tex
 \documentclass{ieeeojies}
 \usepackage{cite}
 \usepackage{amsmath,amssymb,amsfonts}
@@ -15,7 +16,6 @@
 \usepackage{times} 
 \usepackage{amsmath}
 \usepackage{helvet}
-
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 
@@ -45,7 +45,6 @@
 \maketitle
 
 \section{Introduction}
-\label{sec:introduction}
 \indent Cryptocurrency has become a significant and rapidly growing market, with thousands of different digital currencies available for trading. With the rise of cryptocurrency, there has been an increasing demand for accurate and reliable price prediction models. This paper aims to explore the use of statistical models and machine learning algorithms to predict the price of three popular cryptocurrencies: Bitcoin, Ethereum, and Dogecoin.\\
 \indent The price of cryptocurrencies is influenced by a variety of factors, including market demand, investor sentiment, and global economic conditions. These factors make predicting the price of cryptocurrencies a challenging task. However, with the use of statistical models and machine learning algorithms, it is possible to identify patterns and trends in the data that can be used to make more accurate predictions.\\
 \indent This paper scrutinizes a comprehensive suite of models, encompassing traditional statistical methods and advanced machine learning algorithms. Specifically, we explore the application of Linear Regression, ARIMAX (AutoRegressive Integrated Moving Average with Exogenous Variables), Recurrent Neural Networks (RNN), Gated Recurrent Units (GRU), Long Short-Term Memory (LSTM) networks, Vector Autoregression (VAR), XGBoost, and LightGBM. We will evaluate the performance of these models using historical price data and assess their ability to accurately predict future price movements.\\
@@ -177,6 +176,18 @@ As the goal is to forecast the price, only data relating to column “Close"
 \end{itemize}
 
 \section{Methodology}
+\subsection{Linear Regression}
+In statistics, Linear Regression is a supervised learning algorithm that simulates a mathematical relationship between a dependent variable and independent
+variables, enabling predictions for continuous or numeric variables.\
+A multiple linear regression model has the form:
+\[Y=\beta_0+\beta_1X_1+\beta_2X_2+\cdots+\beta_kX_k+\varepsilon\]
+Where:\\
+\indent\textbullet\ Y is the dependent variable (Response variable).\\
+\indent\textbullet\ \(X_1, X_2, \ldots, X_k\) are the independent (Explanatory variables).\\
+\indent\textbullet\ \(\beta_0\) is the intercept term.\\
+\indent\textbullet\ \(\beta_1, ..., \beta_k\) are the regression coefficients for the independent variables.\\
+\indent\textbullet\ \(\varepsilon\) is the error term.\\
+
 \section{Result}
 
 \subsection{Evaluation Methods}
