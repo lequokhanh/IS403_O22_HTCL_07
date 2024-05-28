@@ -188,6 +188,23 @@ Where:\\
 \indent\textbullet\ \(\beta_0\) is the intercept term.\\
 \indent\textbullet\ \(\beta_1,..., \beta_k\) are the regression coefficients for the independent variables.\\
 \indent\textbullet\ \(\varepsilon\) is the error term.
+\subsection{ARIMAX}
+\raggedright
+ARIMAX is a time series forecasting model that combines Autoregressive Integrated Moving Average (ARIMA) model with exogenous variables. It extends  ARIMA by  including external  predictors  (denoted as  X) to improve  forecasting accuracy.  This model involves  specifying AR, I,  and MA components,  along with the  exogenous variables, estimating model parameters, and making forecasts \cite{b3}.\\
+% ARIMA Models are specified by three order parameters: (p, d, q),\ 
+
+% where,\
+%     \indent\textbullet\ p is the order of the AR term
+%     \indent\textbullet\ q is the order of the MA term
+%     \indent\textbullet\ d is the number of differencing required to make the time series stationary\\
+
+An ARIMAX model depicted by the following equation:
+\begin{dmath*}
+    Y_t = \alpha
+    + \underbrace{\beta_1 X_{1,t} + \ldots + \beta_r X_{r,t}}_{\text{exogenous variables}}
+    + \underbrace{\phi_1 Y_{t-1} + \phi_2 Y_{t-2} + \ldots + \phi_p Y_{t-p}}_{\text{AR term}}
+    + \underbrace{\varepsilon_t - \theta_1 \varepsilon_{t-1} - \theta_2 \varepsilon_{t-2} - \ldots - \theta_q \varepsilon_{t-q}}_{\text{MA term}}
+\end{dmath*}
 \section{Result}
 
 \subsection{Evaluation Methods}
