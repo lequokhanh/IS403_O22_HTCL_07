@@ -177,6 +177,17 @@ As the goal is to forecast the price, only data relating to column “Close"
 \end{itemize}
 
 \section{Methodology}
+\subsection{Linear Regression}
+In statistics, Linear Regression is a supervised learning algorithm that simulates a mathematical relationship between a dependent variable and independent
+variables, enabling predictions for continuous or numeric variables.\
+A multiple linear regression model has the form:
+\[Y=\beta_0+\beta_1X_1+\beta_2X_2+\cdots+\beta_kX_k+\varepsilon\]
+Where:\\
+\indent\textbullet\ Y is the dependent variable (Response variable).\\
+\indent\textbullet\ \(X_1, X_2, \ldots, X_k\) are the independent (Explanatory variables).\\
+\indent\textbullet\ \(\beta_0\) is the intercept term.\\
+\indent\textbullet\ \(\beta_1,..., \beta_k\) are the regression coefficients for the independent variables.\\
+\indent\textbullet\ \(\varepsilon\) is the error term.
 \subsection{ARIMAX}
 \raggedright
 ARIMAX is a time series forecasting model that combines Autoregressive Integrated Moving Average (ARIMA) model with exogenous variables. It extends  ARIMA by  including external  predictors  (denoted as  X) to improve  forecasting accuracy.  This model involves  specifying AR, I,  and MA components,  along with the  exogenous variables, estimating model parameters, and making forecasts \cite{b3}.\\
