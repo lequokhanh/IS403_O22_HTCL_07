@@ -238,6 +238,29 @@ Where:\begin {itemize}
     \item \(f\) and \(g\) are activation functions.
 \end{itemize}
 
+\subsection{Gated Recurrent Unit (GRU)}
+Gated Recurrent Units (GRUs) are another type of RNN with a simplified gating mechanism compared to LSTMs. They combine the forget and input gates of the LSTM into a single "update gate". This update gate controls the amount of information from the previous hidden state to let through, and the amount of new information to add.
+The GRU's operations can be summarized as:
+\begin{dmath*}
+    z_t = \sigma(W_z \cdot [h_{t-1}, x_t] + b_z)
+\end{dmath*}
+\begin{dmath*}
+    r_t = \sigma(W_r \cdot [h_{t-1}, x_t] + b_r)
+\end{dmath*}
+\begin{dmath*}
+    \tilde{h}t = \tanh(W \cdot [r_t * h{t-1}, x_t] + b)
+\end{dmath*}
+\begin{dmath*}
+    h_t = (1 - z_t) * h_{t-1} + z_t * \tilde{h}_t
+\end{dmath*}
+Where:
+\begin{itemize}
+    \item \(z_t\) is the update gate.
+    \item \(r_t\) is the reset gate.
+    \item \(\tilde{h}_t\) is the candidate hidden state.
+\end{itemize}
+GRUs achieve comparable performance to LSTMs in many tasks but with fewer parameters, making them computationally more efficient.
+
 
 \section{Result}
 
