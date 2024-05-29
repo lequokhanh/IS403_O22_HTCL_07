@@ -205,6 +205,22 @@ An ARIMAX model depicted by the following equation:
     + \underbrace{\phi_1 Y_{t-1} + \phi_2 Y_{t-2} + \ldots + \phi_p Y_{t-p}}_{\text{AR term}}
     + \underbrace{\varepsilon_t - \theta_1 \varepsilon_{t-1} - \theta_2 \varepsilon_{t-2} - \ldots - \theta_q \varepsilon_{t-q}}_{\text{MA term}}
 \end{dmath*}
+
+\subsection{Vector Autoregression}
+Vector Autoregression (VAR) is a multivariate forecasting algorithm that is used when two or more time series influence each other. \\
+It is considered as a generalization of univariate AR models or a combination between the two or more models and the univariate time series models. Each variable in a VAR is explained by its own lagged values and the lagged values of all the other variables in the equation.\cite{b8} The basic VAR (p) model is given by:
+\[Y_t=c+A_1y_{t-1}+A_2y_{t-2}+...+A_py_{t-p}+\varepsilon_t\]
+Where:\\
+\indent\textbullet\ \(y_t-i\): the "ith lag" of \(y_t\)\\
+\indent\textbullet\ \(c\) is a k-vector of constants\\
+\indent\textbullet\ \(A_i\): time-invariant (k × k)-matrix\\
+\indent\textbullet\ \(\boldsymbol{\varepsilon}_t\): a vector of error terms with \(k\) element\\
+In matrix form:\\
+\begin{dmath*}
+    Y_t=\left[\begin{matrix}y_1\\y_2\\\begin{matrix}\begin{matrix}.\\.\\\end{matrix}\\y_k\\\end{matrix}\\\end{matrix}\right]\ =\left[\begin{matrix}c_1\\c_2\\\begin{matrix}\begin{matrix}.\\.\\\end{matrix}\\c_k\\\end{matrix}\\\end{matrix}\right]+\left[\begin{matrix}\begin{matrix}\phi_{11}\\\phi_{21}\\\end{matrix}&\begin{matrix}.\\.\\\end{matrix}&\begin{matrix}.\\.\\\end{matrix}\\\begin{matrix}.\\.\\\end{matrix}&\ &\ \\\phi_{k1}&.&.\\\end{matrix}\right]\left[\begin{matrix}y_{1,t-1}\\y_{2,t-1}\\\begin{matrix}\begin{matrix}.\\.\\\end{matrix}\\y_{k,t-1}\\\end{matrix}\\\end{matrix}\right]+...+\ \left[\begin{matrix}\begin{matrix}\phi_{11}\\\phi_{21}\\\end{matrix}&\begin{matrix}.\\.\\\end{matrix}&\begin{matrix}.\\.\\\end{matrix}\\\begin{matrix}.\\.\\\end{matrix}&\ &\ \\\phi_{k1}&.&.\\\end{matrix}\right]\left[\begin{matrix}y_{1,t-p}\\y_{2,t-p}\\\begin{matrix}\begin{matrix}.\\.\\\end{matrix}\\y_{k,t-p}\\\end{matrix}\\\end{matrix}\right]+\left[\begin{matrix}\varepsilon_1\\\varepsilon_2\\\begin{matrix}\begin{matrix}.\\.\\\end{matrix}\\\varepsilon_k\\\end{matrix}\\\end{matrix}\right]
+\end{dmath*}
+
+
 \section{Result}
 
 \subsection{Evaluation Methods}

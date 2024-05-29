@@ -31,3 +31,4 @@
 /Latex/*.xdv
 /Latex/*.fdb_latexmk
 /Latex/*.synctex\(busy\)
+**/.DS_Store
