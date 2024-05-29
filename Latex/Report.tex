@@ -219,23 +219,7 @@ In matrix form:\\
 \begin{dmath*}
     Y_t=\left[\begin{matrix}y_1\\y_2\\\begin{matrix}\begin{matrix}.\\.\\\end{matrix}\\y_k\\\end{matrix}\\\end{matrix}\right]\ =\left[\begin{matrix}c_1\\c_2\\\begin{matrix}\begin{matrix}.\\.\\\end{matrix}\\c_k\\\end{matrix}\\\end{matrix}\right]+\left[\begin{matrix}\begin{matrix}\phi_{11}\\\phi_{21}\\\end{matrix}&\begin{matrix}.\\.\\\end{matrix}&\begin{matrix}.\\.\\\end{matrix}\\\begin{matrix}.\\.\\\end{matrix}&\ &\ \\\phi_{k1}&.&.\\\end{matrix}\right]\left[\begin{matrix}y_{1,t-1}\\y_{2,t-1}\\\begin{matrix}\begin{matrix}.\\.\\\end{matrix}\\y_{k,t-1}\\\end{matrix}\\\end{matrix}\right]+...+\ \left[\begin{matrix}\begin{matrix}\phi_{11}\\\phi_{21}\\\end{matrix}&\begin{matrix}.\\.\\\end{matrix}&\begin{matrix}.\\.\\\end{matrix}\\\begin{matrix}.\\.\\\end{matrix}&\ &\ \\\phi_{k1}&.&.\\\end{matrix}\right]\left[\begin{matrix}y_{1,t-p}\\y_{2,t-p}\\\begin{matrix}\begin{matrix}.\\.\\\end{matrix}\\y_{k,t-p}\\\end{matrix}\\\end{matrix}\right]+\left[\begin{matrix}\varepsilon_1\\\varepsilon_2\\\begin{matrix}\begin{matrix}.\\.\\\end{matrix}\\\varepsilon_k\\\end{matrix}\\\end{matrix}\right]
 \end{dmath*}
-\subsection{Recurrent Neural Networks (RNN)}
-Recurrent Neural Networks (RNNs) are a class of artificial neural networks designed for sequential data, where the connections between nodes form a directed graph along a temporal sequence. This allows RNNs to exhibit temporal dynamic behavior for a time sequence. Unlike traditional feedforward neural networks, RNNs can use their internal state (memory) to process variable length sequences of inputs, making them ideal for tasks such as time series prediction, natural language processing, and speech recognition.
-A basic RNN can be represented as follows:
-\begin{dmath*}
-    h_t = f(W_{xh} x_t + W_{hh} h_{t-1} + b_h)
-\end{dmath*}
-\begin{dmath*}
-    y_t = g(W_{hy} h_t + b_y)
-\end{dmath*}
-Where:\begin {itemize}
-    \item \(x_t\) is the input at time step \(t\).
-    \item \(h_t\) is the hidden state at time step \(t\).
-    \item \(y_t\) is the output at time step \(t\).
-    \item \(W_{xh}\), \(W_{hh}\), and \(W_{hy}\) are weight matrices.
-    \item \(b_h\) and \(b_y\) are bias vectors.
-    \item \(f\) and \(g\) are activation functions.
-\end{itemize}
+
 \section{Result}
 
 \subsection{Evaluation Methods}
