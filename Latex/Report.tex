@@ -285,6 +285,39 @@ Where:
     \item \(\tilde{h}_t\) is the candidate hidden state.
 \end{itemize}
 GRUs achieve comparable performance to LSTMs in many tasks but with fewer parameters, making them computationally more efficient.
+
+\subsection{LightGBM}
+LightGBM (Light Gradient Boosting Machine) is another powerful gradient boosting framework, similar in concept to XGBoost but known for its speed and efficiency, particularly with large datasets. It achieves this through several algorithmic innovations:
+\subsubsection{Mathemactical Formulation}
+\begin{dmath*}
+    Obj(\Theta) = \sum_{i=1}^n l(y_i, \hat{y}_i) + \lambda \Omega(T)
+\end{dmath*}
+Where:
+\begin{itemize}
+    \item (n) is the number of data instances.\\
+    \item (l(y_i, \(\hat{y}_i\))) represents the loss function, measuring the difference between the true label ((y_i)) and the predicted label ((\(\hat{y}_i\))). Common loss functions include squared error for regression and logarithmic loss for classification.
+    \item (T) represents the set of decision trees in the ensemble.\\
+    \item $(\Omega(T))$ is a regularization term to penalize model complexity and prevent overfitting.\\
+    \item $ (\lambda) $ is a regularization parameter that controls the strength of the penalty.
+\end{itemize}
+\subsubsection{Key Features}
+\textbf{Gradient-based One-Side Sampling (GOSS):} GOSS focuses on instances with larger gradients while downsampling those with smaller gradients. This speeds up training without significantly impacting accuracy.
+\textbf{Exclusive Feature Bundling (EFB):} EFB bundles mutually exclusive features (features that rarely take non-zero values simultaneously) to reduce the number of features, resulting in faster training and reduced memory usage.
+\textbf{Histogram-based Decision Tree Algorithm:} LightGBM uses a histogram-based algorithm for splitting features during tree construction, which is more efficient than pre-sorted algorithms, especially for large datasets.
+\textbf{Leaf-wise Tree Growth:} Instead of level-wise growth (growing all leaves at a level simultaneously), LightGBM grows trees leaf-wise, adding leaves one at a time to the leaf with the highest delta loss. This can lead to more accurate models but requires careful monitoring for overfitting.
+\subsubsection{Advantages of LightGBM}
+Faster training speed: Due to GOSS, EFB, and histogram-based algorithms.
+Lower memory usage: EFB reduces the number of features and the histogram-based algorithm uses less memory compared to pre-sorting.
+Higher accuracy: Leaf-wise growth strategy can lead to more complex trees that potentially capture data patterns better.
+Handles large datasets effectively: Optimized for speed and memory efficiency, making it well-suited for massive datasets.
+\subsubsection{Applications}
+LightGBM is used across various domains for:
+Classification: Object detection, image classification.
+Regression: Price prediction, demand forecasting.
+Ranking: Recommendation systems, search result ranking.
+\subsubsection{Comparison with XGBoost}
+While both LightGBM and XGBoost are gradient boosting algorithms, LightGBM typically outperforms XGBoost in terms of training speed and memory consumption, particularly for large datasets. However, XGBoost might offer better accuracy for smaller datasets. The choice between the two depends on the specific application and dataset characteristics.
+
 \section{Result}
 
 \subsection{Evaluation Methods}
