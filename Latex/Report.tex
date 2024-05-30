@@ -285,6 +285,42 @@ Where:
     \item \(\tilde{h}_t\) is the candidate hidden state.
 \end{itemize}
 GRUs achieve comparable performance to LSTMs in many tasks but with fewer parameters, making them computationally more efficient.
+
+\subsection{XGBoost}
+XGBoost (Extreme Gradient Boosting) is a powerful machine learning algorithm known for its efficiency and performance. It's a specific implementation of gradient boosting, which is an ensemble method that combines multiple weak learners (typically decision trees) to create a strong predictive model.
+Here's a breakdown of XGBoost:
+\subsubsection{Core Concepts}
+\textbf{Boosting:} XGBoost sequentially builds decision trees, with each tree attempting to correct the errors made by previous trees.
+\textbf{Gradient Descent:} It uses gradient descent to minimize a loss function, guiding the model towards better predictions.
+\textbf{Regularization:} XGBoost incorporates regularization techniques (L1 and L2) to prevent overfitting, ensuring the model generalizes well to unseen data.
+\subsubsection{Mathematical Formulation}
+The objective function that XGBoost seeks to minimize is:
+\begin{dmath*}
+    Obj(\Theta) = \sum_{i=1}^n l(y_i, \hat{y}i) + \sum{k=1}^K \Omega(f_k)
+\end{dmath*}
+Where:
+\begin{itemize}
+    \item (n) is the number of training examples.
+    \item \(\hat{y}_i\) is the loss function measuring the difference between the true label (\(y_i\)) and the predicted label (\(\hat{y}_i\)).
+    \item (\(\Omega(f_k)\)) is the regularization term that penalizes the complexity of the individual trees (\(f_k\)), with (K) being the number of trees.
+\end{itemize}
+\subsubsection{Key Features}
+\textbf{Tree Pruning:} XGBoost uses a pre-pruning strategy to control the complexity of individual trees, preventing them from growing too deep.
+\textbf{Sparsity Awareness:} It effectively handles sparse data (datasets with many missing values) by learning the optimal default direction for missing values.
+\textbf{Parallel Processing:} XGBoost leverages parallel processing capabilities for faster training, making it suitable for large datasets.
+\textbf{Built-in Cross-Validation:} It has built-in cross-validation functionality, simplifying model evaluation and parameter tuning.
+\subsubsection{Advantages of XGBoost}
+High predictive accuracy.
+Robustness to outliers.
+Handles missing data well.
+Feature importance analysis.
+Fast training and prediction speed.
+\subsubsection{Applications}
+XGBoost is widely used in various domains, including:
+Classification (e.g., fraud detection, spam filtering).
+Regression (e.g., predicting house prices, stock market forecasting).
+Ranking (e.g., search engine result ranking, recommendation systems).
+
 \section{Result}
 
 \subsection{Evaluation Methods}
