@@ -221,7 +221,18 @@ In matrix form:\\
 \end{dmath*}
 
 \subsection{Recurrent Neural Networks (RNN)}
-Recurrent Neural Networks (RNNs) are a class of artificial neural networks designed for sequential data, where the connections between nodes form a directed graph along a temporal sequence. This allows RNNs to exhibit temporal dynamic behavior for a time sequence. Unlike traditional feedforward neural networks, RNNs can use their internal state (memory) to process variable length sequences of inputs, making them ideal for tasks such as time series prediction, natural language processing, and speech recognition.
+Recurrent Neural Networks (RNNs) are a class of artificial neural networks designed for sequential data, where the connections between nodes form a directed graph along a temporal sequence. This allows RNNs to exhibit temporal dynamic behavior for a time sequence.\ 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\linewidth]{./image/RNN.png}
+    \caption{Model of RNN architectural}
+    \label{fig:7}
+\end{figure}\\
+\begin {itemize}
+    \item \textbf{Input Layer}: Networks have only one input layer.
+    \item \textbf{Hidden Layer}: Networks have multiple hidden layers.
+    \item \textbf{Output Layer}: Networks have only one output layer.
+\end {itemize}
 A basic RNN can be represented as follows:
 \begin{dmath*}
     h_t = f(W_{xh} x_t + W_{hh} h_{t-1} + b_h)
@@ -287,13 +298,7 @@ Where:
 GRUs achieve comparable performance to LSTMs in many tasks but with fewer parameters, making them computationally more efficient.
 
 \subsection{XGBoost}
-XGBoost (Extreme Gradient Boosting) is a powerful machine learning algorithm known for its efficiency and performance. It's a specific implementation of gradient boosting, which is an ensemble method that combines multiple weak learners (typically decision trees) to create a strong predictive model.
-Here's a breakdown of XGBoost:
-\subsubsection{Core Concepts}
-\textbf{Boosting:} XGBoost sequentially builds decision trees, with each tree attempting to correct the errors made by previous trees.
-\textbf{Gradient Descent:} It uses gradient descent to minimize a loss function, guiding the model towards better predictions.
-\textbf{Regularization:} XGBoost incorporates regularization techniques (L1 and L2) to prevent overfitting, ensuring the model generalizes well to unseen data.
-\subsubsection{Mathematical Formulation}
+XGBoost (Extreme Gradient Boosting) is a powerful machine learning algorithm known for its efficiency and performance. It's a specific implementation of gradient boosting, which is an ensemble method that combines multiple weak learners (typically decision trees) to create a strong predictive model.\\ 
 The objective function that XGBoost seeks to minimize is:
 \begin{dmath*}
     Obj(\Theta) = \sum_{i=1}^n l(y_i, \hat{y}i) + \sum{k=1}^K \Omega(f_k)
@@ -304,26 +309,9 @@ Where:
     \item \(\hat{y}_i\) is the loss function measuring the difference between the true label (\(y_i\)) and the predicted label (\(\hat{y}_i\)).
     \item (\(\Omega(f_k)\)) is the regularization term that penalizes the complexity of the individual trees (\(f_k\)), with (K) being the number of trees.
 \end{itemize}
-\subsubsection{Key Features}
-\textbf{Tree Pruning:} XGBoost uses a pre-pruning strategy to control the complexity of individual trees, preventing them from growing too deep.
-\textbf{Sparsity Awareness:} It effectively handles sparse data (datasets with many missing values) by learning the optimal default direction for missing values.
-\textbf{Parallel Processing:} XGBoost leverages parallel processing capabilities for faster training, making it suitable for large datasets.
-\textbf{Built-in Cross-Validation:} It has built-in cross-validation functionality, simplifying model evaluation and parameter tuning.
-\subsubsection{Advantages of XGBoost}
-High predictive accuracy.
-Robustness to outliers.
-Handles missing data well.
-Feature importance analysis.
-Fast training and prediction speed.
-\subsubsection{Applications}
-XGBoost is widely used in various domains, including:
-Classification (e.g., fraud detection, spam filtering).
-Regression (e.g., predicting house prices, stock market forecasting).
-Ranking (e.g., search engine result ranking, recommendation systems).
-
 \subsection{LightGBM}
-LightGBM (Light Gradient Boosting Machine) is another powerful gradient boosting framework, similar in concept to XGBoost but known for its speed and efficiency, particularly with large datasets. It achieves this through several algorithmic innovations:
-\subsubsection{Mathemactical Formulation}
+LightGBM (Light Gradient Boosting Machine) is another powerful gradient boosting framework, similar in concept to XGBoost but known for its speed and efficiency, particularly with large datasets.\\
+The objective function for LightGBM is:
 \begin{dmath*}
     Obj(\Theta) = \sum_{i=1}^n l(y_i, \hat{y}_i) + \lambda \Omega(T)
 \end{dmath*}
@@ -335,23 +323,6 @@ Where:
     \item $(\Omega(T))$ is a regularization term to penalize model complexity and prevent overfitting.\\
     \item $ (\lambda) $ is a regularization parameter that controls the strength of the penalty.
 \end{itemize}
-\subsubsection{Key Features}
-\textbf{Gradient-based One-Side Sampling (GOSS):} GOSS focuses on instances with larger gradients while downsampling those with smaller gradients. This speeds up training without significantly impacting accuracy.
-\textbf{Exclusive Feature Bundling (EFB):} EFB bundles mutually exclusive features (features that rarely take non-zero values simultaneously) to reduce the number of features, resulting in faster training and reduced memory usage.
-\textbf{Histogram-based Decision Tree Algorithm:} LightGBM uses a histogram-based algorithm for splitting features during tree construction, which is more efficient than pre-sorted algorithms, especially for large datasets.
-\textbf{Leaf-wise Tree Growth:} Instead of level-wise growth (growing all leaves at a level simultaneously), LightGBM grows trees leaf-wise, adding leaves one at a time to the leaf with the highest delta loss. This can lead to more accurate models but requires careful monitoring for overfitting.
-\subsubsection{Advantages of LightGBM}
-Faster training speed: Due to GOSS, EFB, and histogram-based algorithms.
-Lower memory usage: EFB reduces the number of features and the histogram-based algorithm uses less memory compared to pre-sorting.
-Higher accuracy: Leaf-wise growth strategy can lead to more complex trees that potentially capture data patterns better.
-Handles large datasets effectively: Optimized for speed and memory efficiency, making it well-suited for massive datasets.
-\subsubsection{Applications}
-LightGBM is used across various domains for:
-Classification: Object detection, image classification.
-Regression: Price prediction, demand forecasting.
-Ranking: Recommendation systems, search result ranking.
-\subsubsection{Comparison with XGBoost}
-While both LightGBM and XGBoost are gradient boosting algorithms, LightGBM typically outperforms XGBoost in terms of training speed and memory consumption, particularly for large datasets. However, XGBoost might offer better accuracy for smaller datasets. The choice between the two depends on the specific application and dataset characteristics.
 
 \section{Result}
 
