@@ -259,6 +259,7 @@ Long Short-Term Memory (LSTM) networks are a type of RNN designed to address the
     \caption{Model of LSTM architectural}
     \label{fig:8}
 \end{figure}
+\noindent
 - \textbf{Forget Gate}: Controls what information is discarded from the cell state.
 \begin{dmath*}
     f_t = \sigma(W_f \cdot [h_{t-1}, x_t] + b_f)
@@ -297,6 +298,7 @@ Gated Recurrent Units (GRUs) are another type of RNN with a simplified gating me
     \caption{Model of GRU architectural}
     \label{fig:9}
 \end{figure}
+\noindent
 - \textbf{Update Gate}: Controls the amount of information from the previous hidden state to let through, and the amount of new information to add.
 \begin{dmath*}
     z_t = \sigma(W_z \cdot [h_{t-1}, x_t] + b_z)
@@ -328,6 +330,7 @@ XGBoost (eXtreme Gradient Boosting) is a powerful machine learning algorithm tha
     \caption{Model of XGBoost architectural}
     \label{fig:10}
 \end{figure}
+\noindent
 - \textbf{Loss Function}: Measures the difference between the true label \(y_i\) and the predicted label \(\hat{y}_i\),\\
 \begin{dmath*}
     l(y_i, \hat{y}_i) 
@@ -371,12 +374,15 @@ LightGBM (Light Gradient Boosting Machine) is a gradient-boosting framework, bas
     \caption{Leaf-wise tree expansion in LightGBM}
     \label{fig:11}
 \end{figure}
+\noindent
 Additionally, LightGBM combines two techniques to improve performance of GBDT: Gradient-based One-Side Sampling (GOSS) and Exclusive Feature Bundling (EFB).\\
 - \textbf{GOSS}: Retains all instances with large gradients and samples a subset of instances with small gradients to reduce the number of instances.\\
 - \textbf{EFB}: Bundles exclusive features to reduce the number of features and improve efficiency.
-\section{Result}
-
-\subsection{Evaluation Methods}
+\section{Experiment}
+\subsection{Feature Engineering}
+\subsection {Dataset Split Ratio}
+\subsection {Evaluation Methods}
+\subsection {Results}
 
 \section{Conclusion}
 
