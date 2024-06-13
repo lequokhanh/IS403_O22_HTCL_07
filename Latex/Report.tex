@@ -15,12 +15,14 @@
 \usepackage{times} 
 \usepackage{amsmath}
 \usepackage{helvet}
+\usepackage{ragged2e}
+\usepackage{xcolor}
 
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 
 \begin{document}
-\title{\centering USING STATISTICAL MODEL AND MACHINE LEARNING FOR CRYPTOCURRENCY PRICE PREDICTION}
+\title{\centering COMPARATIVE ANALYSIS OF STATISTICAL AND MACHINE LEARNING MODELS FOR ENHANCED CRYPTOCURRENCY PRICE PREDICTION WITH TECHNICAL INDICATOR INTEGRATION}
 
 \author{\uppercase{Le Quoc Khanh}\authorrefmark{1},\uppercase{Le Gia Kiet\authorrefmark{2}, and Nguyen Thi Thuy}\authorrefmark{3}}
 
@@ -61,7 +63,7 @@
 
 \section{Materials}
 \subsection{Dataset}
-The data is collected from finance.yahoo.com, downloading the daily data of Bitcoin, Ethereum and Dogecoin from 2018-Mar-01 to 2024-Mar-01, including close price, open price, high price, low price, Adjust close and the  volume of trading coins with Currency in USD. \\
+The data is collected from finance.yahoo.com, downloading the daily data of Bitcoin, Ethereum and Dogecoin from 2018-Mar-01 to 2024-Jun-01, including close price, open price, high price, low price, Adjust close and the  volume of trading coins with Currency in USD. \\
 Including attributes
 \begin{itemize}
     \raggedright
@@ -82,37 +84,37 @@ As the goal is to forecast the price, only data relating to column “Close"
     \centering
     \renewcommand{\arraystretch}{1.2} % Increase row spacing by 20%
     \newcolumntype{R}{>{\raggedleft\arraybackslash}r} % Define new right-aligned column
-    \begin{tabular}{|c|R|R|R|}
+    \begin{tabular}{|c|r|r|r|}
         \hline
-        \multicolumn{1}{|c|}{\textbf{}} & \multicolumn{1}{c|}{\textbf{DOGE}} & \multicolumn{1}{c|}{\textbf{BTC}} & \multicolumn{1}{c|}{\textbf{ETH}} \\
+                & \multicolumn{1}{c|}{\textbf{BTC}} & \multicolumn{1}{c|}{\textbf{ETH}} & \multicolumn{1}{c|}{\textbf{DOGE}} \\
         \hline
-        Count                           & 2193                               & 2193                              & 2193                              \\
+        Count    & 2285.000 & 2285.000 & 2285.000 \\
         \hline
-        Mean                            & 0.067                              & 22727.117                         & 1298.755                          \\
+        Mean     & 24483.298 & 1383.339 & 0.071 \\
         \hline
-        Median                          & 0.053952                           & 19191.63086                       & 1213.599976                       \\
+        Median   & 18251.604 & 1197.595 & 0.091 \\
         \hline
-        Mode                            & 0.002653                           & 6741.75                           & none                              \\
+        Mode     & 3236.762 & 84.308 & 0.002 \\
         \hline
-        Min                             & 0.002                              & 3236.762                          & 84.308                            \\
+        Min      & 8601.796 & 233.028 & 0.003 \\
         \hline
-        25\%                            & 0.003                              & 8368.83                           & 228.73                            \\
+        25\%     & 20041.738 & 1274.619 & 0.059 \\
         \hline
-        50\%                            & 0.054                              & 19191.631                         & 1213.6                            \\
+        50\%     & 37849.664 & 2088.574 & 0.089 \\
         \hline
-        75\%                            & 0.084                              & 35510.289                         & 1924.566                          \\
+        75\%     & 73083.500 & 4812.087 & 0.685 \\
         \hline
-        Max                             & 0.685                              & 67566.828                         & 4812.087                          \\
+        Max      & 20041.738 & 1274.619 & 0.059 \\
         \hline
-        Std                             & 0.09                               & 16431.978                         & 1145.552                          \\
+        Std      & 6741.750 & 3156.510 & 0.003 \\
         \hline
-        Variance                        & 0.008166821                        & 270009888.9                       & 1312289.819                       \\
+        Variance & 333121045.601 & 1434232.661 & 0.008 \\
         \hline
-        Kurtosis                        & 6.38367187                         & -0.652902729                      & -0.181911084                      \\
+        Kurtosis & 69846.738 & 4727.779 & 0.683 \\
         \hline
-        Skewness                        & 2.186196643                        & 0.702529234                       & 0.81204465                        \\
+        Skewness & 0.762 & 0.703 & 2.005 \\
         \hline
-        Range                           & 0.683                              & 64330.066                         & 4727.779                          \\
+        Range    & -0.509 & -0.528 & 5.603 \\
         \hline
     \end{tabular}
 \end{table}
@@ -189,7 +191,7 @@ Where:\\
 \indent\textbullet\ \(\beta_1,..., \beta_k\) are the regression coefficients for the independent variables.\\
 \indent\textbullet\ \(\varepsilon\) is the error term.
 \subsection{ARIMAX}
-\raggedright
+\justify
 ARIMAX is a time series forecasting model that combines Autoregressive Integrated Moving Average (ARIMA) model with exogenous variables. It extends  ARIMA by  including external  predictors  (denoted as  X) to improve  forecasting accuracy.  This model involves  specifying AR, I,  and MA components,  along with the  exogenous variables, estimating model parameters, and making forecasts \cite{b3}.\\
 % ARIMA Models are specified by three order parameters: (p, d, q),\ 
 
@@ -250,23 +252,37 @@ Where:\begin {itemize}
 \end{itemize}
 
 \subsection{Long Short-Term Memory (LSTM)}
-Long Short-Term Memory (LSTM) networks are a type of RNN designed to address the vanishing gradient problem that can occur with traditional RNNs when processing long sequences. LSTMs achieve this through a more complex cell structure with three gates:
-Forget Gate: Determines what information to discard from the cell state.
+Long Short-Term Memory (LSTM) networks are a type of RNN designed to address the vanishing gradient problem that can occur with traditional RNNs when processing long sequences. LSTMs achieve this through a memory cell which is controlled by three gates:\\
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{./image/LSTM.png}
+    \caption{Model of LSTM architectural}
+    \label{fig:8}
+\end{figure}
+\noindent
+- \textbf{Forget Gate}: Controls what information is discarded from the cell state.
 \begin{dmath*}
     f_t = \sigma(W_f \cdot [h_{t-1}, x_t] + b_f)
 \end{dmath*}
-Input Gate: Controls what new information is added to the cell state.
+- \textbf{Input Gate}: Controls what new information is added to the cell state.
 \begin{dmath*}
     i_t = \sigma(W_i \cdot [h_{t-1}, x_t] + b_i)
 \end{dmath*}
 \begin{dmath*}
-    \tilde{C}t = \tanh(W_C \cdot [h{t-1}, x_t] + b_C)
+    \tilde{C}_t = \tanh(W_C \cdot [h_{t-1}, x_t] + b_C)
 \end{dmath*}
-Output Gate: Regulates the amount of information passed to the output.
+- \textbf{Output Gate}: Controls what information is output form the cell state.
 \begin{dmath*}
     o_t = \sigma(W_o \cdot [h_{t-1}, x_t] + b_o)
 \end{dmath*}
-The cell state ((C_t)) and hidden state ((h_t)) are then updated as follows:
+Where:
+\begin{itemize}
+    \item \(W_f\), \(W_i\), \(W_C\), \(W_o\) are the weight matrices of \textbf{f}orget gate, \textbf{i}nput gate, \textbf{C}ell state, and \textbf{o}utput gate respectively.
+    \item \(b_f\), \(b_i\), \(b_C\), \(b_o\) are the bias vectors of  \textbf{f}orget gate, \textbf{i}nput gate, \textbf{C}ell state, and \textbf{o}utput gate respectively.
+    \item \(\sigma\) is the sigmoid activation function.
+    \item \(\tanh\) is tanh activation function that gives an output of vector from -1 to +1.
+\end{itemize}
+Then the cell state \(C_t\) and hidden state \(h_t\) are then updated as follows:
 \begin{dmath*}
     C_t = f_t * C_{t-1} + i_t * \tilde{C}_t
 \end{dmath*}
@@ -275,58 +291,98 @@ The cell state ((C_t)) and hidden state ((h_t)) are then updated as follows:
 \end{dmath*}
 
 \subsection{Gated Recurrent Unit (GRU)}
-Gated Recurrent Units (GRUs) are another type of RNN with a simplified gating mechanism compared to LSTMs. They combine the forget and input gates of the LSTM into a single "update gate". This update gate controls the amount of information from the previous hidden state to let through, and the amount of new information to add.
-The GRU's operations can be summarized as:
+Gated Recurrent Units (GRUs) are another type of RNN with a simplified gating mechanism compared to LSTMs, which selectively update the hidden state at each time step. The GRU has only two gating mechanisms:\\
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{./image/GRU.png}
+    \caption{Model of GRU architectural}
+    \label{fig:9}
+\end{figure}
+\noindent
+- \textbf{Update Gate}: Controls the amount of information from the previous hidden state to let through, and the amount of new information to add.
 \begin{dmath*}
     z_t = \sigma(W_z \cdot [h_{t-1}, x_t] + b_z)
 \end{dmath*}
+- \textbf{Reset Gate}: Controls the amount of information to forget from the previous hidden state.
 \begin{dmath*}
     r_t = \sigma(W_r \cdot [h_{t-1}, x_t] + b_r)
 \end{dmath*}
+The candidate hidden state is calculated based on the reset gate and the previous hidden state.
 \begin{dmath*}
-    \tilde{h}t = \tanh(W \cdot [r_t * h{t-1}, x_t] + b)
+    \tilde{h}_t = \tanh(W \cdot [r_t * h_{t-1}, x_t] + b)
 \end{dmath*}
+Then the hidden state is updated based on the update gate and the candidate hidden state.
 \begin{dmath*}
     h_t = (1 - z_t) * h_{t-1} + z_t * \tilde{h}_t
 \end{dmath*}
 Where:
 \begin{itemize}
-    \item \(z_t\) is the update gate.
-    \item \(r_t\) is the reset gate.
-    \item \(\tilde{h}_t\) is the candidate hidden state.
+    \item \(z_t\) and \(r_t\) are the update gate and reset gate.
+    \item \(W_z\), \(W_r\), \(W\), \(b_z\), \(b_r\), \(b\) are the weight matrices and bias vectors of the update gate, reset gate, and candidate hidden state respectively.
+    \item \(\sigma\) is the sigmoid activation function.
+    \item \(\tanh\) is the hyperbolic tangent activation function.
 \end{itemize}
-GRUs achieve comparable performance to LSTMs in many tasks but with fewer parameters, making them computationally more efficient.
-
 \subsection{XGBoost}
-XGBoost (Extreme Gradient Boosting) is a powerful machine learning algorithm known for its efficiency and performance. It's a specific implementation of gradient boosting, which is an ensemble method that combines multiple weak learners (typically decision trees) to create a strong predictive model.\\ 
-The objective function that XGBoost seeks to minimize is:
+XGBoost (eXtreme Gradient Boosting) is a powerful machine learning algorithm that uses an ensemble of decision trees and gradient boosting, which combines multiple weak learners to create a strong predictive model, to minimize prediction errors \cite{b9}.\\
+\begin{figure} [H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{./image/XGBoost.png}
+    \caption{Model of XGBoost architectural}
+    \label{fig:10}
+\end{figure}
+\noindent
+- \textbf{Loss Function}: Measures the difference between the true label \(y_i\) and the predicted label \(\hat{y}_i\),\\
 \begin{dmath*}
-    Obj(\Theta) = \sum_{i=1}^n l(y_i, \hat{y}i) + \sum{k=1}^K \Omega(f_k)
+    l(y_i, \hat{y}_i) 
+\end{dmath*}
+- \textbf{Regularization Term}: Penalizes model complexity to prevent overfitting in each the \(f\) tree.\\
+\begin{dmath*}
+    \Omega(f) = \gamma T + \frac{1}{2} \lambda ||w||^2
 \end{dmath*}
 Where:
 \begin{itemize}
-    \item (n) is the number of training examples.
-    \item \(\hat{y}_i\) is the loss function measuring the difference between the true label (\(y_i\)) and the predicted label (\(\hat{y}_i\)).
-    \item (\(\Omega(f_k)\)) is the regularization term that penalizes the complexity of the individual trees (\(f_k\)), with (K) being the number of trees.
+    \item \(T\) is the number of leaves in the \(f\) tree.
+    \item \(w\) is the leaf weight of the \(f\) tree.
+    \item \(\lambda\), \(\gamma\)  are the  hyperparameters.
 \end{itemize}
+- \textbf{Objective Function} = Loss Function + Regularization Term
+\begin{dmath*}
+    \mathcal{L}(\phi) = \sum_{i=1}^n l(y_i, \hat{y}_i) + \Omega(f_k)
+\end{dmath*}
+Decision trees are built sequentially to minimize the objective function. At each step, a new tree \(f_t\) with input features \(x_i\) is added to correct the errors of the current model.
+\begin{dmath*}
+    \hat{y}_i^{(t)} = \hat{y}_i^{(t-1)} + f_t(x_i)
+\end{dmath*}
+- \textbf{Second-order Taylor expansion} is used to optimized the objective function based on gradient \(g\) and hessian \(h\) of the loss function.
+\begin{dmath*}
+    \mathcal{L}^{(t)} \approx \sum_{i=1}^n [l(y_i, \hat{y}_i^{(t-1)}) + g_i f_t(x_i) + \frac{1}{2} h_i f_t^2(x_i)] + \Omega(f_t)
+\end{dmath*}
+Where:
+\begin{itemize}
+    \item \(n\) is the number of data instances.
+    \item \(g_i\) = \(\frac{\partial l(y_i, \hat{y}_i)}{\partial \hat{y}_i}\) and \(h_i\) = \(\frac{\partial^2 l(y_i, \hat{y}_i)}{\partial \hat{y}_i^2}\)
+\end{itemize}
+And to find the optimal leaf weight \(w_j\) for each leaf node \(j\), the objective function is minimized. Then we have the equation:
+\begin{dmath*}
+    w_j = -\frac{\sum_{i \in I_j} g_i}{\sum_{i \in I_j} h_i + \lambda}
+\end{dmath*}
 \subsection{LightGBM}
-LightGBM (Light Gradient Boosting Machine) is another powerful gradient boosting framework, similar in concept to XGBoost but known for its speed and efficiency, particularly with large datasets.\\
-The objective function for LightGBM is:
-\begin{dmath*}
-    Obj(\Theta) = \sum_{i=1}^n l(y_i, \hat{y}_i) + \lambda \Omega(T)
-\end{dmath*}
-Where:
-\begin{itemize}
-    \item (n) is the number of data instances.\\
-    \item (l(y_i, \(\hat{y}_i\))) represents the loss function, measuring the difference between the true label ((y_i)) and the predicted label ((\(\hat{y}_i\))). Common loss functions include squared error for regression and logarithmic loss for classification.
-    \item (T) represents the set of decision trees in the ensemble.\\
-    \item $(\Omega(T))$ is a regularization term to penalize model complexity and prevent overfitting.\\
-    \item $ (\lambda) $ is a regularization parameter that controls the strength of the penalty.
-\end{itemize}
-
-\section{Result}
-
-\subsection{Evaluation Methods}
+LightGBM (Light Gradient Boosting Machine) is a gradient-boosting framework, based on decision tree algorithms, that uses a histogram-based algorithm to speed up training and reduce memory usage. It splits the tree leaf-wise, rather than level-wise, to minimize loss and improve accuracy.\\
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{./image/LightGBM.png}
+    \caption{Leaf-wise tree expansion in LightGBM}
+    \label{fig:11}
+\end{figure}
+\noindent
+Additionally, LightGBM combines two techniques to improve performance of GBDT: Gradient-based One-Side Sampling (GOSS) and Exclusive Feature Bundling (EFB).\\
+- \textbf{GOSS}: Retains all instances with large gradients and samples a subset of instances with small gradients to reduce the number of instances.\\
+- \textbf{EFB}: Bundles exclusive features to reduce the number of features and improve efficiency.
+\section{Experiment}
+\subsection{Feature Engineering}
+\subsection {Dataset Split Ratio}
+\subsection {Evaluation Methods}
+\subsection {Results}
 
 \section{Conclusion}
 
@@ -354,6 +410,11 @@ Where:
     \bibitem{b7} Mudassir, M., Bennbaia, S., Ünal, D., \& Hammoudeh, M. (2020). Time-series forecasting of Bitcoin prices using high-dimensional features: a machine learning approach. \textit{Neural Computing and Applications}. \url{https://doi.org/10.1007/s00521-020-05129-6}
 
     \bibitem{b8} Metsileng, L. D., Moroke, N. D., \& Tsoku, J. T. (2018). Modelling the BRICS exchange rates using the Vector Autoregressive (VAR) model. \textit{Journal of Economics and Behavioral Studies}, 10(5(J)), 220–229. \url{https://doi.org/10.22610/jebs.v10i5(j).2511}
+
+    \bibitem {b9} What is XGBoost? (n.d.). NVIDIA Data Science Glossary. \url{https://www.nvidia.com/en-us/glossary/xgboost/}
+
+    \bibitem{b10} Chen, T., \& Guestrin, C. (2016, August). Xgboost: A scalable tree boosting system. \textit{In Proceedings of the 22nd acm sigkdd international conference on knowledge discovery and data mining (pp. 785-794).} 
+
 \end{thebibliography}
 
 \EOD
