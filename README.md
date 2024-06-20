@@ -4,7 +4,7 @@
 This repository contains the code and resources for a class project on forecasting cryptocurrency prices using statistical models and machine learning algorithms. The project explores the performance of Linear Regression, ARIMAX, Recurrent Neural Networks (RNN), Gated Recurrent Units (GRU), Long Short-Term Memory (LSTM) networks, Vector Autoregression (VAR), XGBoost, and LightGBM in forecasting the prices of Bitcoin, Ethereum, and Dogecoin.
 
 ## Dataset
-The dataset used in this project is collected from finance.yahoo.com, containing daily data for Bitcoin, Ethereum, and Dogecoin from 2018-03-01 to 2024-0-01. The dataset includes features such as open price, high price, low price, close price, adjusted close price, and trading volume.
+The dataset used in this project is collected from finance.yahoo.com, containing daily data for Bitcoin, Ethereum, and Dogecoin from 2018-03-01 to 2024-06-01. The dataset includes features such as open price, high price, low price, close price, adjusted close price, and trading volume.
 
 ## Feature Engineering
 To improve the predictive performance of the models, the project incorporates technical indicators as features. These indicators, such as moving averages and momentum indicators, provide insights into market sentiment and trends, aiding in the prediction of price movements.
