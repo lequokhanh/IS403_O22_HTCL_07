@@ -88,35 +88,35 @@ As the goal is to forecast the price, only data relating to column “Close"
     \newcolumntype{R}{>{\raggedleft\arraybackslash}r} % Define new right-aligned column
     \begin{tabular}{|c|r|r|r|}
         \hline
-                & \multicolumn{1}{c|}{\textbf{BTC}} & \multicolumn{1}{c|}{\textbf{ETH}} & \multicolumn{1}{c|}{\textbf{DOGE}} \\
+                 & \multicolumn{1}{c|}{\textbf{BTC}} & \multicolumn{1}{c|}{\textbf{ETH}} & \multicolumn{1}{c|}{\textbf{DOGE}} \\
         \hline
-        Count    & 2285.000 & 2285.000 & 2285.000 \\
+        Count    & 2285.000                          & 2285.000                          & 2285.000                           \\
         \hline
-        Mean     & 24483.298 & 1383.339 & 0.071 \\
+        Mean     & 24483.298                         & 1383.339                          & 0.071                              \\
         \hline
-        Median   & 18251.604 & 1197.595 & 0.091 \\
+        Median   & 18251.604                         & 1197.595                          & 0.091                              \\
         \hline
-        Mode     & 3236.762 & 84.308 & 0.002 \\
+        Mode     & 3236.762                          & 84.308                            & 0.002                              \\
         \hline
-        Min      & 8601.796 & 233.028 & 0.003 \\
+        Min      & 8601.796                          & 233.028                           & 0.003                              \\
         \hline
-        25\%     & 20041.738 & 1274.619 & 0.059 \\
+        25\%     & 20041.738                         & 1274.619                          & 0.059                              \\
         \hline
-        50\%     & 37849.664 & 2088.574 & 0.089 \\
+        50\%     & 37849.664                         & 2088.574                          & 0.089                              \\
         \hline
-        75\%     & 73083.500 & 4812.087 & 0.685 \\
+        75\%     & 73083.500                         & 4812.087                          & 0.685                              \\
         \hline
-        Max      & 20041.738 & 1274.619 & 0.059 \\
+        Max      & 20041.738                         & 1274.619                          & 0.059                              \\
         \hline
-        Std      & 6741.750 & 3156.510 & 0.003 \\
+        Std      & 6741.750                          & 3156.510                          & 0.003                              \\
         \hline
-        Variance & 333121045.601 & 1434232.661 & 0.008 \\
+        Variance & 333121045.601                     & 1434232.661                       & 0.008                              \\
         \hline
-        Kurtosis & 69846.738 & 4727.779 & 0.683 \\
+        Kurtosis & 69846.738                         & 4727.779                          & 0.683                              \\
         \hline
-        Skewness & 0.762 & 0.703 & 2.005 \\
+        Skewness & 0.762                             & 0.703                             & 2.005                              \\
         \hline
-        Range    & -0.509 & -0.528 & 5.603 \\
+        Range    & -0.509                            & -0.528                            & 5.603                              \\
         \hline
     \end{tabular}
     \caption{Descriptive Statistics of Cryptocurrencies}
@@ -190,7 +190,7 @@ A multiple linear regression model has the form:
 \[Y=\beta_0+\beta_1X_1+\beta_2X_2+\cdots+\beta_kX_k+\varepsilon\]
 Where:\\
 \indent\textbullet\ Y is the dependent variable (Response variable).\\
-\indent\textbullet\ \(X_1, X_2, \ldots, X_k\) are the independent (Explanatory variables).\\
+\indent\textbullet\ \(X_1, X_2, \ldots, X_k\) are the independent variables. In this case, these variables correspond to various types of technical indicators. \\
 \indent\textbullet\ \(\beta_0\) is the intercept term.\\
 \indent\textbullet\ \(\beta_1,..., \beta_k\) are the regression coefficients for the independent variables.\\
 \indent\textbullet\ \(\varepsilon\) is the error term.
@@ -212,6 +212,7 @@ An ARIMAX model depicted by the following equation:
     + \underbrace{\varepsilon_t - \theta_1 \varepsilon_{t-1} - \theta_2 \varepsilon_{t-2} - \ldots - \theta_q \varepsilon_{t-q}}_{\text{MA term}}
 \end{dmath*}
 
+Here, \(Y_t\) represents the cryptocurrency price at time \(t\), and \(X_{1,t},\)...\(,X_{r,t}\) are the technical indicators used as exogenous variables. These technical indicators include moving averages (SMA, EMA), momentum indicators (RSI, MACD), Bollinger Bands. These indicators details are discussed in the Feature Engineering section.
 \subsection{Vector Autoregression}
 Vector Autoregression (VAR) is a multivariate forecasting algorithm that is used when two or more time series influence each other. \\
 It is considered as a generalization of univariate AR models or a combination between the two or more models and the univariate time series models. Each variable in a VAR is explained by its own lagged values and the lagged values of all the other variables in the equation.The basic VAR (p) model is given by:
@@ -221,13 +222,40 @@ Where:\\
 \indent\textbullet\ \(c\) is a k-vector of constants\\
 \indent\textbullet\ \(A_i\): time-invariant (k × k)-matrix\\
 \indent\textbullet\ \(\boldsymbol{\varepsilon}_t\): a vector of error terms with \(k\) element\\
-In matrix form:\\
+In matrix form:
 \begin{dmath*}
-    Y_t=\left[\begin{matrix}y_1\\y_2\\\begin{matrix}\begin{matrix}.\\.\\\end{matrix}\\y_k\\\end{matrix}\\\end{matrix}\right]\ =\left[\begin{matrix}c_1\\c_2\\\begin{matrix}\begin{matrix}.\\.\\\end{matrix}\\c_k\\\end{matrix}\\\end{matrix}\right]+\left[\begin{matrix}\begin{matrix}\phi_{11}\\\phi_{21}\\\end{matrix}&\begin{matrix}.\\.\\\end{matrix}&\begin{matrix}.\\.\\\end{matrix}\\\begin{matrix}.\\.\\\end{matrix}&\ &\ \\\phi_{k1}&.&.\\\end{matrix}\right]\left[\begin{matrix}y_{1,t-1}\\y_{2,t-1}\\\begin{matrix}\begin{matrix}.\\.\\\end{matrix}\\y_{k,t-1}\\\end{matrix}\\\end{matrix}\right]+...+\ \left[\begin{matrix}\begin{matrix}\phi_{11}\\\phi_{21}\\\end{matrix}&\begin{matrix}.\\.\\\end{matrix}&\begin{matrix}.\\.\\\end{matrix}\\\begin{matrix}.\\.\\\end{matrix}&\ &\ \\\phi_{k1}&.&.\\\end{matrix}\right]\left[\begin{matrix}y_{1,t-p}\\y_{2,t-p}\\\begin{matrix}\begin{matrix}.\\.\\\end{matrix}\\y_{k,t-p}\\\end{matrix}\\\end{matrix}\right]+\left[\begin{matrix}\varepsilon_1\\\varepsilon_2\\\begin{matrix}\begin{matrix}.\\.\\\end{matrix}\\\varepsilon_k\\\end{matrix}\\\end{matrix}\right]
+    Y_t=\begin{bmatrix}
+        y_1 \\ y_2 \\ \vdots \\ y_k
+    \end{bmatrix}
+    = \begin{bmatrix}
+        c_1 \\ c_2 \\ \vdots \\ c_k
+    \end{bmatrix}
+    + \begin{bmatrix}
+        \phi_{11} & \phi_{12} & \cdots & \phi_{1k} \\
+        \phi_{21} & \phi_{22} & \cdots & \phi_{2k} \\
+        \vdots    & \vdots    & \ddots & \vdots    \\
+        \phi_{k1} & \phi_{k2} & \cdots & \phi_{kk}
+    \end{bmatrix}
+    \begin{bmatrix}
+        y_{1,t-1} \\ y_{2,t-1} \\ \vdots \\ y_{k,t-1}
+    \end{bmatrix}
+    + \cdots
+    + \begin{bmatrix}
+        \phi_{11} & \phi_{12} & \cdots & \phi_{1k} \\
+        \phi_{21} & \phi_{22} & \cdots & \phi_{2k} \\
+        \vdots    & \vdots    & \ddots & \vdots    \\
+        \phi_{k1} & \phi_{k2} & \cdots & \phi_{kk}
+    \end{bmatrix}
+    \begin{bmatrix}
+        y_{1,t-p} \\ y_{2,t-p} \\ \vdots \\ y_{k,t-p}
+    \end{bmatrix}
+    + \begin{bmatrix}
+        \varepsilon_1 \\ \varepsilon_2 \\ \vdots \\ \varepsilon_k
+    \end{bmatrix}
 \end{dmath*}
 
 \subsection{Recurrent Neural Networks (RNN)}
-Recurrent Neural Networks (RNNs) are a class of artificial neural networks designed for sequential data, where the connections between nodes form a directed graph along a temporal sequence. This allows RNNs to exhibit temporal dynamic behavior for a time sequence.\ 
+Recurrent Neural Networks (RNNs) are a class of artificial neural networks designed for sequential data, where the connections between nodes form a directed graph along a temporal sequence. This allows RNNs to exhibit temporal dynamic behavior for a time sequence.\
 \begin{figure}[h]
     \centering
     \includegraphics[width=\linewidth]{./image/RNN.png}
@@ -235,9 +263,9 @@ Recurrent Neural Networks (RNNs) are a class of artificial neural networks desig
     \label{fig:7}
 \end{figure}\\
 \begin {itemize}
-    \item \textbf{Input Layer}: Networks have only one input layer.
-    \item \textbf{Hidden Layer}: Networks have multiple hidden layers.
-    \item \textbf{Output Layer}: Networks have only one output layer.
+\item \textbf{Input Layer}: Networks have only one input layer.
+\item \textbf{Hidden Layer}: Networks have multiple hidden layers.
+\item \textbf{Output Layer}: Networks have only one output layer.
 \end {itemize}
 A basic RNN can be represented as follows:
 \begin{dmath*}
@@ -295,7 +323,7 @@ Then the cell state \(C_t\) and hidden state \(h_t\) are then updated as follows
 \end{dmath*}
 
 \subsection{Gated Recurrent Unit (GRU)}
-Gated Recurrent Units (GRUs) are another type of RNN with a simplified gating mechanism compared to LSTMs, which selectively update the hidden state at each time step. The GRU has only two gating mechanisms:\\
+Gated Recurrent Units (GRUs) are another type of RNN with a simplified gating mechanism compared to LSTMs, which selectively update the hidden state at each time step. The GRU has only two gating mechanisms
 \begin{figure}[H]
     \centering
     \includegraphics[width=\linewidth]{./image/GRU.png}
@@ -337,7 +365,7 @@ XGBoost (eXtreme Gradient Boosting) is a powerful machine learning algorithm tha
 \noindent
 - \textbf{Loss Function}: Measures the difference between the true label \(y_i\) and the predicted label \(\hat{y}_i\),\\
 \begin{dmath*}
-    l(y_i, \hat{y}_i) 
+    l(y_i, \hat{y}_i)
 \end{dmath*}
 - \textbf{Regularization Term}: Penalizes model complexity to prevent overfitting in each the \(f\) tree.\\
 \begin{dmath*}
@@ -371,8 +399,8 @@ And to find the optimal leaf weight \(w_j\) for each leaf node \(j\), the object
     w_j = -\frac{\sum_{i \in I_j} g_i}{\sum_{i \in I_j} h_i + \lambda}
 \end{dmath*}
 \subsection{LightGBM}
-LightGBM (Light Gradient Boosting Machine) is an advanced machine learning algorithm that builds upon the Gradient Boosting Decision Tree (GBDT) framework. It uses a histogram-based algorithm to speed up training and reduce memory usage.\\
-LightGBM grows trees based on leaf-wise, while most other boosting tools (including XGBoost) are based on level-wise. Leaf-wise selects nodes to grow the tree based on optimizing the entire tree, while level-wise optimizes on the branch under consideration. This allows LightGBM to achieve lower loss than other boosting algorithms.
+LightGBM is an advanced algorithm that enhances Gradient Boosting Decision Trees (GBDT) by using a histogram-based approach for faster training and lower memory usage. Unlike traditional methods like XGBoost, LightGBM grows trees in a leaf-wise manner, optimizing the entire tree structure at each step rather than level-wise optimization within each branch. This allows LightGBM to achieve superior performance in terms of minimizing loss, reducing training time and reduce memory usage.\\
+For time series forecasting with LightGBM and XGBoost Regression, each historical observation \(y_t\) is treated as a feature vector, and its subsequent value serves as the target variable. Features are constructed using lagged values, such as \(X_t = (y_{t-1}, y_{t-2},..,y_{t-p})\), where \(p\) represents the number of lagged observations included. This approach leverages the sequential nature of time series data to train the model effectively and make accurate predictions.\\
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\linewidth]{./image/LightGBM.png}
@@ -380,27 +408,25 @@ LightGBM grows trees based on leaf-wise, while most other boosting tools (includ
     \label{fig:11}
 \end{figure}
 \noindent
-Additionally, LightGBM enhances the efficiency and scalability of GBDT through the integration of two novel techniques: Gradient-based One-Side Sampling (GOSS) and Exclusive Feature Bundling (EFB) \cite{b9}.\\
-%- \textbf{GOSS}: Retains all instances with large gradients and samples a subset of instances with small gradients to reduce the number of instances.\\
-%- \textbf{EFB}: Bundles exclusive features to reduce the number of features and improve efficiency.\\
+LightGBM enhances GBDT efficiency and scalability with Gradient-based One-Side Sampling (GOSS) and Exclusive Feature Bundling (EFB) \cite{b9}, improving its handling of large datasets and predictive accuracy, including in time series forecasting\\
 \begin{itemize}
     \item \textbf{Gradient-based One-Side Sampling (GOSS)}\\
-    %GOSS keeps all the instances with large gradients and performs random sampling on the instanceswith small gradients. In order to compensate the inﬂuence to the data distribution, when computing theinformation gain, GOSS introduces a constant multiplier for the data instances with small gradients(see Alg. 2). Speciﬁcally, GOSS ﬁrstly sorts the data instances according to the absolute value of theirgradients and selects the topa×100%instances. Then it randomly samplesb×100%instances fromthe rest of the data. After that, GOSS ampliﬁes the sampled data with small gradients by a constant1−abwhen calculating the information gain. By doing so, we put more focus on the under-trainedinstances without changing the original data distribution by much.
-    GOSS keeps all the instances with large gradients and performs random sampling on the instances with small gradients. In order to compensate for the influence on the data distribution, when computing the information gain, GOSS introduces a constant multiplier for the data instances with small gradients. Specifically, GOSS first sorts the data instances according to the absolute value of their gradients and selects the top \(a \times 100\%\) instances. Then it randomly samples \(b \times 100\%\) instances from the rest of the data. After that, GOSS amplifies the sampled data with small gradients by a constant \(\frac{1-a}{b}\) when calculating the information gain.\\
-    %By doing so, we put more focus on the under-trained instances without changing the original data distribution by much.
+          GOSS selectively retains instances with large gradients while performing random sampling on instances with smaller gradients. This method maintains data distribution balance by applying a constant multiplier to instances with small gradients during information gain calculation. Specifically, it selects the top \(a \times 100\%\) instances based on gradient magnitude, then randomly samples \(b \times 100\%\) instances from the remainder. Instances with small gradients are boosted by a factor of \(\frac{1-a}{b}\) to compensate for their reduced representation.\\
     \item \textbf{Exclusive Feature Bundling (EFB)}\\
-    High-dimensional data often have many features, but most of them are sparse, meaning they frequently take on zero values. Because many features are mutually exclusive (never nonzero at the same time), we can combine these features into Exclusive Feature Bundles. By a carefully designed feature scanning algorithm, we can build thesame feature histograms from the feature bundles as those from individual features. In this way, thecomplexity of histogram building changes from \(O(\#data \times \#feature)\) to \(O(\#data \times \#bundle)\), while \#bundle << \#feature. %This can greatly reduce the time and memory consumption of histogram building. 
+          In scenarios with high-dimensional data containing sparse features (often zero-valued), EFB bundles mutually exclusive features together. This reduces the complexity of histogram building from \(O(\#data \times \#feature)\) to \(O(\#data \times \#bundle)\), where \(\#bundle\) is significantly smaller than \(\#feature\). A feature scanning algorithm efficiently constructs histograms from these bundles, maintaining comparable performance to individual feature histograms.
 \end{itemize}
-However,  LightGBM  regression  has  disadvantages in generating the overfitting model as well as being sensitive the noise.
+
 
 \section{Experiment}
 \subsection{Feature Engineering}
-In this section, we focus on constructing diverse input features derived from technical indicators related to the Close price only. These features aim to enhance the predictive capabilities of our models and support continuous forecasting for out-of-sample (OOS) data. The selected indicators include the Moving Average Convergence/Divergence (MACD), Bollinger Bands (Upper and Lower), 26-period Moving Average (\(MA_{26}\)), and 20-period Exponential Moving Average (\(EMA_{20}\)).\\ 
-MACD: The MACD is a trend-following momentum indicator that shows the relationship between two moving averages of a security’s price. It is calculated by subtracting the 26-period EMA from the 12-period EMA. The MACD helps identify changes in the strength, direction, momentum, and duration of a trend in a security’s price.
+In this section, we focus on constructing diverse input features derived from technical indicators related to the Close price only. These features aim to enhance the predictive capabilities of our models and support continuous forecasting for out-of-sample (OOS) data. The selected indicators include the Moving Average Convergence/Divergence (MACD), Bollinger Bands (Upper and Lower), 26-period Moving Average (\(MA_{26}\)), and 20-period Exponential Moving Average (\(EMA_{20}\)).
+\\
+\textbf{Moving Average Convergence/Divergence} (\(MACD\)): The MACD is a trend-following momentum indicator that shows the relationship between two moving averages of a security’s price. It is calculated by subtracting the 26-period EMA from the 12-period EMA. The MACD helps identify changes in the strength, direction, momentum, and duration of a trend in a security’s price.
+
 \begin{dmath*}
     MACD = EMA_{12} - EMA_{26}
 \end{dmath*}
-Bollinger Band (BBand): BBands consist of a middle band (20-period moving average) and two outer bands (standard deviations away from the middle band). The upper and lower bands provide a relative definition of high and low prices. The upper BBand is calculated by adding two standard deviations to the 20-period moving average, and the lower BBand is calculated by subtracting two standard deviations from the 20-period moving average
+\textbf{Bollinger bands} (BBands)s: BBands consist of a middle band (20-period moving average) and two outer bands (standard deviations away from the middle band). The upper and lower bands provide a relative definition of high and low prices. The upper BBand is calculated by adding two standard deviations to the 20-period moving average, and the lower BBand is calculated by subtracting two standard deviations from the 20-period moving average
 \begin{dmath*}
     Upper Band = MA_{20} + (2 \times \text{Standard Deviation})
 \end{dmath*}
@@ -408,12 +434,12 @@ Bollinger Band (BBand): BBands consist of a middle band (20-period moving averag
     Lower Band = MA_{20} - (2 \times \text{Standard Deviation})
 \end{dmath*}
 \noindent
-\(MA_{26}\): The \(MA_{26}\) is a simple moving average calculated by averaging the closing prices over the last 26 periods. It helps smooth out price data to identify the direction of the trend over a medium-term period.
+\textbf{26-period Moving Average} (\(MA_{26}\)): The \(MA_{26}\) is a simple moving average calculated by averaging the closing prices over the last 26 periods. It helps smooth out price data to identify the direction of the trend over a medium-term period.
 \begin{dmath*}
     MA_{26} = \frac{1}{26} \sum_{i=1}^{26} \text{Close}_i
 \end{dmath*}
 \noindent
-\(EMA_{20}\): The \(EMA_{20}\) is a type of moving average that places a greater weight and significance on the most recent data points. The EMA20 responds more quickly to recent price changes compared to the simple moving average. It is used to identify short-term trends.
+\textbf{20-period Exponential Moving Average} (\(\textbf{EMA}_{\textnormal{20}}\)): The \(EMA_{20}\) is a type of moving average that places a greater weight and significance on the most recent data points. The EMA20 responds more quickly to recent price changes compared to the simple moving average. It is used to identify short-term trends.
 \begin{dmath*}
     %EMA_20 = \frac{2}{21} \times \text{Close} + \frac{19}{21} \times \text{EMA}_{19}
     EMA_{20} = (Close_t \times \frac{2}{1+20}) + (EMA_{20,t-1} \times (1-\frac{2}{20+1}))
@@ -432,22 +458,22 @@ With:
 \end{itemize}
 \noindent
 - \textbf{Root Mean Squared Error (RMSE)}: Measures the average of the squared differences between the predicted and actual values.
-    \begin{dmath*}
-        RMSE = \sqrt{\frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2}
-    \end{dmath*}
-    (Best value = 0, Worst value = \(+\infty\))\\
+\begin{dmath*}
+    RMSE = \sqrt{\frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2}
+\end{dmath*}
+(Best value = 0, Worst value = \(+\infty\))\\
 \noindent
 - \textbf{Mean Absolute Percentage Error (MAPE)}: Measures the average of the absolute percentage differences between the predicted and actual values.
-    \begin{dmath*}
-        MAPE = \frac{1}{n} \sum_{i=1}^{n} \left| \frac{y_i - \hat{y}_i}{y_i} \right| \times 100
-    \end{dmath*}
-        (Best value = 0, Worst value = \(+\infty\%\))\\
+\begin{dmath*}
+    MAPE = \frac{1}{n} \sum_{i=1}^{n} \left| \frac{y_i - \hat{y}_i}{y_i} \right| \times 100
+\end{dmath*}
+(Best value = 0, Worst value = \(+\infty\%\))\\
 \noindent
 - \textbf{Symmetric Mean Absolute Percentage Error (SMAPE)}: Measures the symmetric average of the absolute percentage differences between the predicted and actual values.
-    \begin{dmath*}
-        SMAPE = \frac{1}{n} \sum_{i=1}^{n} \frac{\left| y_i - \hat{y}_i \right|}{\left( \left| y_i \right| + \left| \hat{y}_i \right| \right)/2} \times 100
-    \end{dmath*}
-    (Best value = 0, Worst value = 200\%)\\
+\begin{dmath*}
+    SMAPE = \frac{1}{n} \sum_{i=1}^{n} \frac{\left| y_i - \hat{y}_i \right|}{\left( \left| y_i \right| + \left| \hat{y}_i \right| \right)/2} \times 100
+\end{dmath*}
+(Best value = 0, Worst value = 200\%)\\
 \subsection {Results}
 \begin{table}[H]
     \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}|c|c|c|c|c|}
@@ -512,16 +538,16 @@ Based on the result table above, we can see that the GRU model is the best-perfo
         LightGBM & \makecell{7:3 \\ \textbf{8:2} \\ 9:1} & \makecell{130,99 \\ \textbf{137,65} \\ 183,24} & \makecell{5,13 \\ \textbf{4,23} \\ 5,10} & \makecell{4,97 \\ \textbf{4,21} \\ 5,12} \\
         \hline
     \end{tabular*}
-% \end{table}
-    
-% \begin{table}[H]
-%     \centering
-%     \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}|m{2cm}|c|c|c|c|}
-%         \hline
-%         %130,99	5,13	4,97	137,65	4,23	4,21	183,24	5,10	5,12
-%         LightGBM & \makecell{7:3 \\ 8:2 \\ 9:1} & \makecell{130,99 \\ 137,65 \\ 183,24} & \makecell{5,13 \\ 4,23 \\ 5,10} & \makecell{4,97 \\ 4,21 \\ 5,12} \\
-%         \hline
-%     %ETH Dâtaset
+    % \end{table}
+
+    % \begin{table}[H]
+    %     \centering
+    %     \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}|m{2cm}|c|c|c|c|}
+    %         \hline
+    %         %130,99	5,13	4,97	137,65	4,23	4,21	183,24	5,10	5,12
+    %         LightGBM & \makecell{7:3 \\ 8:2 \\ 9:1} & \makecell{130,99 \\ 137,65 \\ 183,24} & \makecell{5,13 \\ 4,23 \\ 5,10} & \makecell{4,97 \\ 4,21 \\ 5,12} \\
+    %         \hline
+    %     %ETH Dâtaset
     % \end{tabular*}
     \caption{ETH Dataset}
     \label{table:3}
@@ -590,163 +616,163 @@ Based on the result table above, we can see that the GRU model is the best-perfo
 % \end{figure}
 \subsubsection{BTC Dataset}
 \begin{figure}[H]
-    \centering 
-    \includegraphics[width=0.8\linewidth]{./././visualize/LinearRegression/BTC-80-20.png} 
+    \centering
+    \includegraphics[width=0.8\linewidth]{./././visualize/LinearRegression/BTC-80-20.png}
     \caption{Linear Regression model’s result with 8:2 ratio}
     \label{fig:12}
 \end{figure}
 \begin{figure}[H]
-    \centering 
-    \includegraphics[width=0.8\linewidth]{./././visualize/ARIMAX/BTC-80-20.png} 
+    \centering
+    \includegraphics[width=0.8\linewidth]{./././visualize/ARIMAX/BTC-80-20.png}
     \caption{ARIMAX model’s result with 8:2 ratio}
     \label{fig:13}
 \end{figure}
 \begin{figure}[H]
-    \centering 
-    \includegraphics[width=0.8\linewidth]{./././visualize/VAR/BTC-80-20.png} 
+    \centering
+    \includegraphics[width=0.8\linewidth]{./././visualize/VAR/BTC-80-20.png}
     \caption{VAR model’s result with 8:2 ratio}
     \label{fig:14}
 \end{figure}
 \begin{figure}[H]
-    \centering 
-    \includegraphics[width=0.8\linewidth]{./././visualize/RNN/BTC-80-20.png} 
+    \centering
+    \includegraphics[width=0.8\linewidth]{./././visualize/RNN/BTC-80-20.png}
     \caption{RNN model’s result with 8:2 ratio}
     \label{fig:15}
 \end{figure}
 \begin{figure}[H]
-    \centering 
-    \includegraphics[width=0.8\linewidth]{./././visualize/LSTM/BTC-80-20.png} 
+    \centering
+    \includegraphics[width=0.8\linewidth]{./././visualize/LSTM/BTC-80-20.png}
     \caption{LSTM model’s result with 8:2 ratio}
     \label{fig:16}
 \end{figure}
 %lstm 9:1
 \begin{figure}[H]
-    \centering 
-    \includegraphics[width=0.8\linewidth]{./././visualize/LSTM/BTC-90-10.png} 
+    \centering
+    \includegraphics[width=0.8\linewidth]{./././visualize/LSTM/BTC-90-10.png}
     \caption{LSTM model’s result with 9:1 ratio}
     \label{fig:17}
 \end{figure}
 
 %xgboost 9:1
 \begin{figure}[H]
-    \centering 
-    \includegraphics[width=0.8\linewidth]{./././visualize/XGBoost/BTC-90-10.png} 
+    \centering
+    \includegraphics[width=0.8\linewidth]{./././visualize/XGBoost/BTC-90-10.png}
     \caption{XGBoost model’s result with 9:1 ratio}
     \label{fig:19}
 \end{figure}
 %lightgbm 7:3
 \begin{figure}[H]
-    \centering 
-    \includegraphics[width=0.8\linewidth]{./././visualize/LightGBM/BTC-70-30.png} 
+    \centering
+    \includegraphics[width=0.8\linewidth]{./././visualize/LightGBM/BTC-70-30.png}
     \caption{LightGBM model’s result with 7:3 ratio}
     \label{fig:20}
 \end{figure}
 \subsubsection{ETH Dataset}
 \begin{figure}[H]
-    \centering 
-    \includegraphics[width=0.8\linewidth]{./././visualize/LinearRegression/ETH-80-20.png} 
+    \centering
+    \includegraphics[width=0.8\linewidth]{./././visualize/LinearRegression/ETH-80-20.png}
     \caption{Linear Regression model’s result with 8:2 ratio}
     \label{fig:21}
 \end{figure}
 \begin{figure}[H]
-    \centering 
-    \includegraphics[width=0.8\linewidth]{./././visualize/ARIMAX/ETH-80-20.png} 
+    \centering
+    \includegraphics[width=0.8\linewidth]{./././visualize/ARIMAX/ETH-80-20.png}
     \caption{ARIMAX model’s result with 8:2 ratio}
     \label{fig:22}
 \end{figure}
 \begin{figure}[H]
-    \centering 
-    \includegraphics[width=0.8\linewidth]{./././visualize/VAR/ETH-80-20.png} 
+    \centering
+    \includegraphics[width=0.8\linewidth]{./././visualize/VAR/ETH-80-20.png}
     \caption{VAR model’s result with 8:2 ratio}
     \label{fig:23}
 \end{figure}
 %rnn 9:1
 \begin{figure}[H]
-    \centering 
-    \includegraphics[width=0.8\linewidth]{./././visualize/RNN/ETH-90-10.png} 
+    \centering
+    \includegraphics[width=0.8\linewidth]{./././visualize/RNN/ETH-90-10.png}
     \caption{RNN model’s result with 9:1 ratio}
     \label{fig:24}
 \end{figure}
 %lstm 8:2
 \begin{figure}[H]
-    \centering 
-    \includegraphics[width=0.8\linewidth]{./././visualize/LSTM/ETH-80-20.png} 
+    \centering
+    \includegraphics[width=0.8\linewidth]{./././visualize/LSTM/ETH-80-20.png}
     \caption{LSTM model’s result with 8:2 ratio}
     \label{fig:25}
 \end{figure}
 %gru 8:2
 \begin{figure}[H]
-    \centering 
-    \includegraphics[width=0.8\linewidth]{./././visualize/GRU/ETH-80-20.png} 
+    \centering
+    \includegraphics[width=0.8\linewidth]{./././visualize/GRU/ETH-80-20.png}
     \caption{GRU model’s result with 8:2 ratio}
     \label{fig:26}
 \end{figure}
 %xgboost 8:2
 \begin{figure}[H]
-    \centering 
-    \includegraphics[width=0.8\linewidth]{./././visualize/XGBoost/ETH-80-20.png} 
+    \centering
+    \includegraphics[width=0.8\linewidth]{./././visualize/XGBoost/ETH-80-20.png}
     \caption{XGBoost model’s result with 8:2 ratio}
     \label{fig:27}
 \end{figure}
 %lightgbm 8:2
 \begin{figure}[H]
-    \centering 
-    \includegraphics[width=0.8\linewidth]{./././visualize/LightGBM/ETH-80-20.png} 
+    \centering
+    \includegraphics[width=0.8\linewidth]{./././visualize/LightGBM/ETH-80-20.png}
     \caption{LightGBM model’s result with 8:2 ratio}
     \label{fig:28}
 \end{figure}
 \subsubsection{DOGE Dataset}
 \begin{figure}[H]
-    \centering 
-    \includegraphics[width=0.8\linewidth]{./././visualize/LinearRegression/DOGE-80-20.png} 
+    \centering
+    \includegraphics[width=0.8\linewidth]{./././visualize/LinearRegression/DOGE-80-20.png}
     \caption{Linear Regression model’s result with 8:2 ratio}
     \label{fig:29}
 \end{figure}
 \begin{figure}[H]
-    \centering 
-    \includegraphics[width=0.8\linewidth]{./././visualize/ARIMAX/DOGE-80-20.png} 
+    \centering
+    \includegraphics[width=0.8\linewidth]{./././visualize/ARIMAX/DOGE-80-20.png}
     \caption{ARIMAX model’s result with 8:2 ratio}
     \label{fig:30}
 \end{figure}
 %var 7:3
 \begin{figure}[H]
-    \centering 
-    \includegraphics[width=0.8\linewidth]{./././visualize/VAR/DOGE-70-30.png} 
+    \centering
+    \includegraphics[width=0.8\linewidth]{./././visualize/VAR/DOGE-70-30.png}
     \caption{VAR model’s result with 7:3 ratio}
     \label{fig:31}
 \end{figure}
 %rnn 9:1
 \begin{figure}[H]
-    \centering 
-    \includegraphics[width=0.8\linewidth]{./././visualize/RNN/DOGE-90-10.png} 
+    \centering
+    \includegraphics[width=0.8\linewidth]{./././visualize/RNN/DOGE-90-10.png}
     \caption{RNN model’s result with 9:1 ratio}
     \label{fig:32}
 \end{figure}
 %lstm 9:1
 \begin{figure}[H]
-    \centering 
-    \includegraphics[width=0.8\linewidth]{./././visualize/LSTM/DOGE-90-10.png} 
+    \centering
+    \includegraphics[width=0.8\linewidth]{./././visualize/LSTM/DOGE-90-10.png}
     \caption{LSTM model’s result with 9:1 ratio}
     \label{fig:33}
 \end{figure}
 %gru 7:3
 \begin{figure}[H]
-    \centering 
-    \includegraphics[width=0.8\linewidth]{./././visualize/GRU/DOGE-70-30.png} 
+    \centering
+    \includegraphics[width=0.8\linewidth]{./././visualize/GRU/DOGE-70-30.png}
     \caption{GRU model’s result with 7:3 ratio}
     \label{fig:34}
 \end{figure}
 %xgboost 8:2
 \begin{figure}[H]
-    \centering 
-    \includegraphics[width=0.8\linewidth]{./././visualize/XGBoost/DOGE-80-20.png} 
+    \centering
+    \includegraphics[width=0.8\linewidth]{./././visualize/XGBoost/DOGE-80-20.png}
     \caption{XGBoost model’s result with 8:2 ratio}
     \label{fig:35}
 \end{figure}
 %lightgbm 8:2
 \begin{figure}[H]
-    \centering 
-    \includegraphics[width=0.8\linewidth]{./././visualize/LightGBM/DOGE-80-20.png} 
+    \centering
+    \includegraphics[width=0.8\linewidth]{./././visualize/LightGBM/DOGE-80-20.png}
     \caption{LightGBM model’s result with 8:2 ratio}
     \label{fig:36}
 \end{figure}
@@ -787,9 +813,9 @@ We extend our heartfelt gratitude to Associate Professor Nguyen Dinh Thuan and T
     \bibitem{b9} Guo, X., Ha, M., Tao, X., Li, S., Li, Y., Zhu, Z., Shen, Z., \& Ma, L. (2024). Multi-Task Learning with Sequential Dependence Toward Industrial Applications: A Systematic Formulation. \textit{ACM Transactions on Knowledge Discovery from Data, 18(5), 1-29}. \url{https://doi.org/10.1145/3640468}
     \bibitem {b10} Demir, S., Mincev, K., Kok, J., \& Paterakis, N. G. (2019). Introducing Technical Indicators to Electricity Price Forecasting: A feature engineering study for linear, ensemble, and deep machine learning models. \textit{Applied Sciences, 10(1), 255}. \url{https://doi.org/10.3390/app10010255}
 
-    \bibitem{b11} Chen, T., \& Guestrin, C. (2016, August). Xgboost: A scalable tree boosting system. \textit{In Proceedings of the 22nd acm sigkdd international conference on knowledge discovery and data mining (pp. 785-794).} 
-    
-    \bibitem{12} Agrawal, M., Shukla, P. K., Nair, R., Nayyar, A., \& Masud, M. (2022). Stock prediction based on technical indicators using deep learning model. \textit{Computers, Materials \& Continua/Computers, Materials \& Continua (Print), 70(1), 287–304}. \url{https://doi.org/10.32604/cmc.2022.014637} 
+    \bibitem{b11} Chen, T., \& Guestrin, C. (2016, August). Xgboost: A scalable tree boosting system. \textit{In Proceedings of the 22nd acm sigkdd international conference on knowledge discovery and data mining (pp. 785-794).}
+
+    \bibitem{12} Agrawal, M., Shukla, P. K., Nair, R., Nayyar, A., \& Masud, M. (2022). Stock prediction based on technical indicators using deep learning model. \textit{Computers, Materials \& Continua/Computers, Materials \& Continua (Print), 70(1), 287–304}. \url{https://doi.org/10.32604/cmc.2022.014637}
 
     \bibitem{13} Vol. 12 No. 3 (2024) | \textit{International Journal of Intelligent Systems and Applications in Engineering. (2023c, March 6)}. \url{https://ijisae.org/index.php/IJISAE/issue/view/126}
 
@@ -797,7 +823,7 @@ We extend our heartfelt gratitude to Associate Professor Nguyen Dinh Thuan and T
 
     \bibitem{15} Htun, H. H., Biehl, M., \& Petkov, N. (2023). Survey of feature selection and extraction techniques for stock market prediction. \textit{Financial Innovation, 9(1)}. \url{https://doi.org/10.1186/s40854-022-00441-7}
 
-    
+
 
 \end{thebibliography}
 
